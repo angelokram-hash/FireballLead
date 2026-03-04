@@ -253,7 +253,7 @@
 <section class="section-dark" style="padding:4rem 2rem; text-align:center;">
   <h2 style="color:var(--white); font-size:1.5rem; margin:0 0 0.75rem;">3 Muster-Sticks. Kostenlos. Unverbindlich.</h2>
   <p style="color:rgba(255,255,255,0.5); margin-bottom:1.5rem;">Legen Sie die Sticks neben Ihre Lippenstifte — der Rest passiert von allein.</p>
-  <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="btn-primary">Muster-Paket anfordern →</a>
+  <a href="#" onclick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} class="btn-primary">Muster-Paket anfordern →</a>
 </section>
 
 <footer style="background:var(--teal); border-top:1px solid rgba(255,255,255,0.08); padding:2rem; text-align:center;">

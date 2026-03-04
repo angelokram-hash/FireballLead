@@ -252,7 +252,7 @@
 <section class="section-dark" style="padding:4rem 2rem; text-align:center;">
   <h2 style="color:var(--white); font-size:1.5rem; margin:0 0 0.75rem;">Bereit für den Test?</h2>
   <p style="color:rgba(255,255,255,0.5); margin-bottom:1.5rem;">4 Wochen testen. Kein Risiko. Kein Mindestvertrag.</p>
-  <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="btn-primary">Probedisplay anfordern →</a>
+  <a href="#" onclick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} class="btn-primary">Probedisplay anfordern →</a>
 </section>
 
 <footer style="background:var(--teal); border-top:1px solid rgba(255,255,255,0.08); padding:2rem; text-align:center;">

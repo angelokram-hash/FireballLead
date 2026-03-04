@@ -236,7 +236,7 @@
 <section class="section-dark" style="padding:4rem 2rem; text-align:center;">
   <h2 style="color:var(--white); font-size:1.5rem; margin:0 0 0.75rem;">Wie viel Umsatz steckt in 0,2m²?</h2>
   <p style="color:rgba(255,255,255,0.5); margin-bottom:1.5rem;">Fordern Sie unseren Produktivitätsrechner an — maßgeschneidert auf Ihre Frequenz.</p>
-  <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="btn-primary">Produktivitätsrechner anfordern →</a>
+  <a href="#" onclick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} class="btn-primary">Produktivitätsrechner anfordern →</a>
 </section>
 
 <footer style="background:var(--teal); border-top:1px solid rgba(255,255,255,0.08); padding:2rem; text-align:center;">
