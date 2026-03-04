@@ -1,236 +1,114 @@
 <script lang="ts">
   import Navbar from '$lib/components/Navbar.svelte';
   import LeadForm from '$lib/components/LeadForm.svelte';
-
   const steps = [
-    {
-      timing: 'Tag 1',
-      title: 'Lookbook & Konditionen anfordern',
-      active: true,
-      description: 'Füllen Sie das Formular aus. Sie erhalten unser Lookbook mit der vollständigen Designer-Story, Produktfotos und Sonderkonditionen für Kulturinstitutionen.',
-      tasks: [
-        'Formular mit Einrichtung, Shop-Art und Kontaktdaten ausfüllen',
-        'Sie erhalten: Lookbook mit hochauflösenden Lifestyle-Fotos',
-        'Designer-Story von Miranda Konstantinidou — für Ihre Produktbeschreibungen nutzbar',
-        'Manufaktur-Bilder: Leilanie beim Löten, Josie bei den Kristallen, Erlinda in der QS',
-        'Preisliste mit Sonderkonditionen für Museums- und Hotelshops',
-        'Übersicht: Welche Farben eignen sich als „Souvenir" und „Geschenk"?',
-      ],
-      tip: 'Erwähnen Sie den thematischen Kontext Ihres Museums oder Hotels — wir können Farben empfehlen, die zu Ihrer Ausstellung oder Ihrem Branding passen.'
-    },
-    {
-      timing: 'Tag 3–5',
-      title: 'Beratung: Das richtige Konzept für Ihren Shop',
-      active: true,
-      description: 'Telefonat oder Video-Call (15–20 Minuten) zur Erarbeitung eines Shop-Konzepts, das zu Ihrer Einrichtung passt.',
-      tasks: [
-        'Analyse Ihres Shops: Größe, Sortiment, Besucherprofil, Durchschnittsbon',
-        'Konzept-Empfehlung: FIREBALL als „Design-Souvenir" oder als „Geschenk-Sortiment"?',
-        'Display-Auswahl: D18 (ideal für kleine Shops) oder D21 (für mehr Platz)',
-        'Farbkonzept: Passend zu Ihrer Ausstellung, Ihrem Hotel-Thema oder Ihrer Region',
-        'Produktbeschreibung erstellen: Text für Preisschild, Website, Social Media',
-        'Story-Karte: A5-Karte mit Designer- und Manufaktur-Geschichte zum Beilegen',
-      ],
-      tip: 'Museumsshops mit einer guten Produkt-Story verkaufen bis zu 40% mehr. Die FIREBALL-Geschichte (30+ Jahre, eigene Manufaktur, Handarbeit) ist Ihr Verkaufsargument.'
-    },
-    {
-      timing: 'Woche 2',
-      title: 'Display bestellen & einrichten',
-      active: true,
-      description: 'Das Display wird geliefert. Zusätzlich erhalten Sie Story-Karten und POS-Material speziell für Kultureinrichtungen.',
-      tasks: [
-        'Fertig bestücktes Display geliefert — auspacken und platzieren',
-        'Story-Karten beilegen: Jeder Kunde kann die Designer-Geschichte mitnehmen',
-        'Preisschild mit „Handgefertigt · Kristallsteine · Design by Miranda Konstantinidou"',
-        'Team-Briefing: Die 3 Story-Elemente, die Besucher überzeugen',
-        'Element 1: „Jeder FIREBALL wird von Hand in unserer Manufaktur gefertigt"',
-        'Element 2: „Über 280 Farben — seit 30 Jahren jedes Jahr neue Farben"',
-        'Element 3: „Die Stick-Verpackung ist Präsentation und Geschenk-Etui in einem"',
-        'Optional: QR-Code am Display verlinkt auf FIREBALL Manufaktur-Video',
-      ],
-      tip: 'Platzieren Sie das Display in der Nähe der Kasse — Besucher kaufen Mitbringsel typischerweise beim Hinausgehen.'
-    },
-    {
-      timing: 'Woche 3–8',
-      title: 'Testphase & Besucherreaktionen',
-      active: false,
-      description: 'Sechs Wochen testen, beobachten und optimieren. Wir begleiten Sie mit Check-ins.',
-      tasks: [
-        'Woche 3–4: Erste Beobachtungen — Greifen Besucher zum Display? Welche Farben zuerst?',
-        'Woche 5: Check-in — Verkaufszahlen, beliebteste Farben, Besucherfeedback',
-        'Woche 6: Farboptimierung — Nachbestellung der Top-Seller, Austausch von Slow-Movern',
-        'Woche 7–8: Abschlussbewertung mit Performance-Zahlen',
-        'Dokumentieren: Wird geschenkt oder selbst getragen? Touristen oder Einheimische?',
-        'Beobachten: Kommen Besucher gezielt wegen FIREBALL wieder?',
-        'Testen: Funktioniert eine Empfehlung des Teams am Eingang oder an der Kasse besser?',
-      ],
-      tip: 'Hotels mit Boutique-Shop: Legen Sie eine FIREBALL Info-Karte ins Zimmer oder an die Rezeption — „Entdecken Sie handgefertigten Designerschmuck in unserer Boutique."'
-    },
-    {
-      timing: 'Ab Woche 9',
-      title: 'Partnerschaft & Storytelling',
-      active: false,
-      description: 'Nach erfolgreicher Testphase: Feste Partnerschaft mit fortlaufender Story-Unterstützung und saisonalen Highlights.',
-      tasks: [
-        'Festbestellung mit optimiertem Farbsortiment basierend auf Testdaten',
-        'Saisonale Farb-Updates passend zu Ihren Ausstellungswechseln oder Hotel-Saisons',
-        'Geschenk-Sets für besondere Anlässe: Weihnachten, Muttertag, Valentinstag',
-        'Marketing-Material: Social Media Posts, Website-Texte, Newsletter-Bausteine',
-        'Exklusiv-Farben: Ab 5 Displays möglich — eine Farbe nur für Ihre Einrichtung',
-        'Cross-Selling: FIREBALL Ketten als „großes Geschenk" neben dem „kleinen Mitbringsel"',
-        'Nachbestellung per App oder E-Mail — unkompliziert, schnelle Lieferung',
-      ],
-      tip: 'Besonders erfolgreich: Eine „Signature-Farbe" für Ihr Museum oder Hotel — ein FIREBALL, den es nur bei Ihnen gibt.'
-    },
+    { t: 'Tag 1', title: 'Lookbook & Konditionen anfordern', desc: 'Formular ausfüllen → Lookbook mit Designer-Story, Manufaktur-Fotos und Sonderkonditionen.', tasks: ['Lookbook mit hochauflösenden Lifestyle-Fotos', 'Designer-Story von Miranda Konstantinidou', 'Manufaktur-Bilder: Handarbeit in Cebu', 'Sonderkonditionen für Kultureinrichtungen'], tip: 'Erwähnen Sie den thematischen Kontext — wir empfehlen Farben passend zu Ihrer Ausstellung.' },
+    { t: 'Tag 3–5', title: 'Beratung: Das richtige Konzept', desc: 'Call (15–20 Min): FIREBALL als Design-Souvenir oder Geschenk-Sortiment? Display, Farben, Story-Karte.', tasks: ['Analyse: Besucherprofil, Durchschnittsbon, Sortiment', 'Konzept: Souvenir oder Geschenk-Sortiment?', 'Story-Karte A5: Designer- und Manufaktur-Geschichte', 'QR-Code für Manufaktur-Video (optional)'], tip: 'Shops mit guter Produkt-Story verkaufen bis zu 40% mehr.' },
+    { t: 'Woche 2', title: 'Display & Story-Material einrichten', desc: 'Fertig bestücktes Display + Story-Karten + Team-Briefing mit 3 Story-Elementen.', tasks: ['Display auspacken und nahe der Kasse platzieren', 'Story-Karten für Kunden zum Mitnehmen', '„Jeder FIREBALL wird von Hand gefertigt"', '„Über 280 Farben — seit 30 Jahren jedes Jahr neue"', '„Stick = Präsentation und Geschenk-Etui in einem"'], tip: 'Besucher kaufen Mitbringsel beim Hinausgehen — Display nahe Ausgang/Kasse.' },
+    { t: 'Woche 3–8', title: 'Testphase & Besucherreaktionen', desc: '6 Wochen testen. Welche Farben zuerst? Wird geschenkt oder selbst getragen?', tasks: ['Woche 3–4: Greifen Besucher zum Display?', 'Woche 5: Verkaufszahlen, beliebteste Farben', 'Woche 6: Nachbestellung Top-Seller', 'Woche 7–8: Abschlussbewertung'], tip: 'Hotels: FIREBALL-Karte ins Zimmer — „Entdecken Sie Designerschmuck in unserer Boutique."' },
+    { t: 'Ab Woche 9', title: 'Partnerschaft & Storytelling', desc: 'Feste Partnerschaft mit saisonalen Updates, Geschenk-Sets und optionalen Exklusiv-Farben.', tasks: ['Saisonale Farben passend zu Ausstellungswechseln', 'Geschenk-Sets: Weihnachten, Muttertag, Valentinstag', 'Exklusiv-Farbe nur für Ihre Einrichtung (ab 5 Displays)', 'Cross-Selling: Ketten als „großes Geschenk"'], tip: 'Besonders erfolgreich: Eine Signature-Farbe, die es nur bei Ihnen gibt.' },
   ];
 </script>
 
 <svelte:head>
-  <title>FIREBALL für Museumsshops & Hotels — Display-Partnerschaft</title>
-  <meta name="description" content="Handgefertigter Designerschmuck als perfektes Mitbringsel — FIREBALL Display-Konzept für Museumsshops, Hotels und Tourismus-Retail." />
+  <title>FIREBALL für Museumsshops — Handgefertigt. Mit Geschichte. Das perfekte Mitbringsel.</title>
+  <meta name="description" content="FIREBALL Designerschmuck: Handgefertigt, 30+ Jahre Geschichte, geschenkfertige Stick-Verpackung. Lookbook anfordern." />
 </svelte:head>
 
 <Navbar dark={true} />
 
 <!-- HERO -->
-<section class="section-dark noise-overlay" style="position:relative; padding:8rem 2rem 5rem;">
-  <div style="position:relative; z-index:2; max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center;">
+<section style="position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden;">
+  <div style="position:absolute; inset:0;">
+    <img src="/img/12.jpeg" alt="FIREBALL Manufaktur" style="width:100%; height:100%; object-fit:cover;" />
+    <div style="position:absolute; inset:0; background:linear-gradient(135deg, rgba(26,60,64,0.92) 0%, rgba(26,60,64,0.7) 50%, rgba(26,60,64,0.35) 100%);"></div>
+  </div>
+  <div style="position:relative; z-index:2; max-width:1200px; margin:0 auto; padding:8rem 2rem 4rem; width:100%;">
+    <div style="display:grid; grid-template-columns:1fr 420px; gap:4rem; align-items:center;">
+      <div>
+        <p class="animate-fade-up" style="font-family:'Josefin Sans',sans-serif; color:var(--gold); font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:1rem;">Für Museumsshops & Hotel-Boutiquen</p>
+        <h1 class="animate-fade-up delay-100" style="font-size:clamp(2rem,4vw,3rem); font-weight:700; color:var(--white); line-height:1.1; margin:0 0 1.5rem;">Handgefertigt. Mit Geschichte. Das perfekte <span style="color:var(--gold);">Mitbringsel.</span></h1>
+        <p class="animate-fade-up delay-200" style="font-size:1.05rem; color:rgba(255,255,255,0.7); line-height:1.7; margin-bottom:2rem;">Vor mehr als 30 Jahren von Miranda Konstantinidou entworfen. Jedes Stück von Hand gefertigt in unserer Manufaktur. Über 280 Farben. Geschenkfertig im Stick.</p>
+        <div class="animate-fade-up delay-300" style="display:flex; gap:2.5rem;">
+          <div><div class="stat-number" style="font-size:2rem;">30+</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">Jahre Design</div></div>
+          <div><div class="stat-number" style="font-size:2rem;">280+</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">Farben</div></div>
+          <div><div class="stat-number" style="font-size:2rem;">Handmade</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">Manufaktur</div></div>
+        </div>
+      </div>
+      <div class="animate-fade-up delay-300" style="background:rgba(255,255,255,0.06); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.1); padding:2rem;">
+        <h3 style="color:var(--gold); font-size:1.1rem; margin:0 0 0.5rem;">Lookbook mit Designer-Story</h3>
+        <p style="color:rgba(255,255,255,0.5); font-size:0.85rem; margin-bottom:1.5rem;">Fotos, Geschichte, Manufaktur — für Ihre Produktpräsentation.</p>
+        <LeadForm channel="museumsshops" ctaText="Lookbook anfordern" brancheOptions={['Museumsshop', 'Hotel-Boutique', 'Galerie-Shop', 'Concept Store (Kultur)']} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DER OHRRING -->
+<section style="background:var(--cream); padding:5rem 2rem;">
+  <div style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center;">
     <div>
-      <p class="animate-fade-up" style="font-family:'Josefin Sans',sans-serif; color:var(--gold); font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:1rem;">
-        Für Museumsshops, Hotel-Boutiquen & Tourismus-Retail
-      </p>
-      <h1 class="animate-fade-up delay-100" style="font-size:clamp(2rem, 4vw, 2.8rem); font-weight:700; color:var(--white); line-height:1.15; margin:0 0 1.5rem;">
-        Handgefertigt. Mit Geschichte.<br/>
-        <span style="color:var(--gold);">Das perfekte Mitbringsel.</span>
-      </h1>
-      <p class="animate-fade-up delay-200" style="font-size:1.05rem; color:rgba(255,255,255,0.65); line-height:1.7; margin-bottom:2rem;">
-        Seit über 30 Jahren wird jeder FIREBALL von Hand in unserer Manufaktur gefertigt.
-        Die Stick-Verpackung macht ihn geschenkfertig — kein Einpacken nötig.
-        Ein Mitbringsel, das nicht in der Schublade verschwindet.
-      </p>
-      <div class="animate-fade-up delay-300" style="display:flex; gap:2rem; flex-wrap:wrap;">
-        <div><div class="stat-number" style="font-size:1.8rem;">30+</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">Jahre Design</div></div>
-        <div><div class="stat-number" style="font-size:1.8rem;">39,90€</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">ab RPR</div></div>
-        <div><div class="stat-number" style="font-size:1.8rem;">0,2m²</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">Platzbedarf</div></div>
+      <h2 style="font-size:1.6rem; color:var(--teal); margin:0 0 1.5rem;">Der Ohrring mit Geschichte</h2>
+      <p style="font-size:0.95rem; color:var(--gray-500); line-height:1.8; margin-bottom:1.5rem;">Der FIREBALL wurde vor mehr als 30 Jahren von Miranda Konstantinidou für Konplott entworfen. Jedes Jahr kommen neue Farben hinzu — insgesamt nun mehr als 280. Seit wir den FIREBALL machen, gibt es kein Jahr, in dem er nicht unser meistverkaufter Artikel ist. Mit Abstand.</p>
+      <div style="padding-left:1rem; border-left:3px solid #5C6B4E;">
+        <p style="font-size:0.9rem; color:var(--teal); line-height:1.6; margin:0;">Wir kennen nicht den Hersteller — <strong>wir sind der Hersteller.</strong> Und wir kennen die Menschen, die die Schmuckstücke von Hand fertigen. Leilanie, Josie, Erlinda — seit Jahren Teil unseres Teams.</p>
       </div>
     </div>
-    <div class="animate-fade-up delay-200" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:2rem;">
-      <h3 style="color:var(--gold); font-size:1.1rem; margin:0 0 0.5rem;">Lookbook + Konditionen anfordern</h3>
-      <p style="color:rgba(255,255,255,0.5); font-size:0.85rem; margin-bottom:1.5rem;">Inklusive Designer-Story, Produktfotos und spezielle Konditionen für Kulturinstitutionen.</p>
-      <LeadForm channel="museumsshops" ctaText="Lookbook anfordern" brancheOptions={['Museumsshop', 'Hotel-Boutique', 'Flughafen-Shop', 'Tourismus-Shop', 'Design-Store']} />
+    <img src="/img/6.jpeg" alt="Der FIREBALL Ohrring" style="width:100%; border:1px solid var(--gray-200);" />
+  </div>
+</section>
+
+<!-- MANUFAKTUR -->
+<section style="padding:0;"><img src="/img/12.jpeg" alt="FIREBALL Manufaktur Handarbeit" style="width:100%; display:block;" /></section>
+
+<!-- DER STICK -->
+<section style="background:var(--white); padding:5rem 2rem;">
+  <div style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center;">
+    <img src="/img/10.jpeg" alt="FIREBALL Stick" style="width:100%; border:1px solid var(--gray-200);" />
+    <div>
+      <h2 style="font-size:1.5rem; color:var(--teal); margin:0 0 1rem;">Geschenkfertig im Stick</h2>
+      <p style="font-size:0.95rem; color:var(--gray-500); line-height:1.7; margin-bottom:1rem;">Die Stick-Verpackung ist gleichzeitig Präsentation, Verpackung und Reise-Etui. Kein zusätzliches Geschenkpapier nötig. Kein Abfall.</p>
+      <p style="font-size:0.95rem; color:var(--gray-500); line-height:1.7;">Ideal als Mitbringsel: kompakt, elegant, mit einer Geschichte, die man weitererzählen kann.</p>
     </div>
   </div>
 </section>
 
-<!-- STORY -->
-<section class="section-cream" style="padding:5rem 2rem;">
-  <div style="max-width:900px; margin:0 auto;">
-    <h2 style="font-size:1.8rem; margin:0 0 1rem; text-align:center;">Die Geschichte hinter jedem Stück</h2>
-    <p style="color:var(--gray-500); text-align:center; max-width:600px; margin:0 auto 2.5rem; line-height:1.7;">
-      Der FIREBALL wurde von Miranda Konstantinidou entworfen und wird in der eigenen Manufaktur handgefertigt.
-      Jedes Stück hat eine Geschichte — perfekt für Shops, die mehr bieten wollen als anonyme Massenware.
-    </p>
-    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:2rem;">
-      <div class="card" style="border-top:3px solid #5C6B4E; text-align:center;">
-        <div style="font-size:2rem; margin-bottom:0.75rem;">🎨</div>
-        <h4 style="font-size:1rem; color:var(--teal); margin:0 0 0.5rem;">280+ Farben</h4>
-        <p style="font-size:0.85rem; color:var(--gray-500); line-height:1.6;">
-          Jedes Jahr neue Farben — Ihre Kunden haben Grund, wiederzukommen.
-        </p>
-      </div>
-      <div class="card" style="border-top:3px solid #5C6B4E; text-align:center;">
-        <div style="font-size:2rem; margin-bottom:0.75rem;">🎁</div>
-        <h4 style="font-size:1rem; color:var(--teal); margin:0 0 0.5rem;">Geschenkfertig</h4>
-        <p style="font-size:0.85rem; color:var(--gray-500); line-height:1.6;">
-          Die Stick-Verpackung ist Präsentation, Verpackung und Case in einem. Kein Einpacken nötig.
-        </p>
-      </div>
-      <div class="card" style="border-top:3px solid #5C6B4E; text-align:center;">
-        <div style="font-size:2rem; margin-bottom:0.75rem;">✋</div>
-        <h4 style="font-size:1rem; color:var(--teal); margin:0 0 0.5rem;">Handgemacht</h4>
-        <p style="font-size:0.85rem; color:var(--gray-500); line-height:1.6;">
-          Leilanie lötet, Josie appliziert Kristalle, Erlinda prüft die Qualität — seit über 20 Jahren.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SCHRITT FÜR SCHRITT -->
-<section class="section-white" style="padding:5rem 2rem;">
-  <div style="max-width:900px; margin:0 auto;">
-    <p style="font-family:'Josefin Sans',sans-serif; color:var(--gold); font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.75rem; text-align:center;">
-      Ihr Weg zum Display-Partner
-    </p>
-    <h2 style="font-size:clamp(1.6rem, 3vw, 2rem); margin:0 0 1rem; text-align:center;">
-      Schritt für Schritt: So starten Sie
-    </h2>
-    <p style="color:var(--gray-500); text-align:center; max-width:600px; margin:0 auto 3rem; line-height:1.7;">
-      Von der Anfrage bis zum fertigen Shop-Konzept — inklusive Story-Material.
-    </p>
-
-    <div style="display:flex; flex-direction:column; gap:0;">
-      {#each steps as step, i}
-        <div style="display:grid; grid-template-columns:64px 1fr; gap:1.5rem; position:relative;">
-          <div style="display:flex; flex-direction:column; align-items:center;">
-            <div style="
-              width:48px; height:48px; border-radius:50%;
-              background:{step.active ? 'var(--gold)' : 'var(--white)'};
-              border:2px solid {step.active ? 'var(--gold)' : 'var(--gray-200)'};
-              display:flex; align-items:center; justify-content:center;
-              font-family:'Josefin Sans',sans-serif; font-weight:700;
-              color:{step.active ? 'var(--teal)' : 'var(--gray-500)'};
-              font-size:1.1rem; z-index:2;
-            ">{i + 1}</div>
-            {#if i < steps.length - 1}
-              <div style="width:2px; flex:1; background:var(--gray-200); min-height:20px;"></div>
-            {/if}
-          </div>
-          <div style="padding-bottom:2.5rem;">
-            <div style="
-              background:var(--cream); border:1px solid var(--gray-200);
-              border-left:3px solid {step.active ? '#5C6B4E' : 'var(--gray-200)'};
-              padding:1.5rem;
-            ">
-              <span style="font-size:0.7rem; font-family:'Josefin Sans',sans-serif; letter-spacing:0.1em; color:#5C6B4E; text-transform:uppercase;">{step.timing}</span>
-              <h3 style="font-size:1.1rem; color:var(--teal); margin:0.25rem 0 0.5rem;">{step.title}</h3>
-              <p style="font-size:0.9rem; color:var(--gray-500); line-height:1.7; margin-bottom:1rem;">{step.description}</p>
-              <div style="display:flex; flex-direction:column; gap:0.5rem;">
-                {#each step.tasks as task}
-                  <div style="display:flex; align-items:flex-start; gap:0.5rem;">
-                    <span style="color:#5C6B4E; font-size:0.85rem; margin-top:2px;">✓</span>
-                    <span style="font-size:0.85rem; color:var(--gray-700); line-height:1.5;">{task}</span>
-                  </div>
-                {/each}
-              </div>
-              {#if step.tip}
-                <div style="margin-top:1rem; padding:0.75rem 1rem; background:rgba(92,107,78,0.06); border-left:2px solid #5C6B4E;">
-                  <p style="font-size:0.8rem; color:var(--teal); margin:0;"><strong>💡 Tipp:</strong> {step.tip}</p>
-                </div>
-              {/if}
-            </div>
+<!-- STEPS -->
+<section style="background:var(--cream); padding:5rem 2rem;">
+  <div style="max-width:800px; margin:0 auto;">
+    <h2 style="font-size:1.8rem; text-align:center; margin:0 0 3rem;">So starten Sie — Schritt für Schritt</h2>
+    {#each steps as step, i}
+      <div style="display:grid; grid-template-columns:56px 1fr; gap:1.25rem;">
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div style="width:44px; height:44px; border-radius:50%; background:#5C6B4E; display:flex; align-items:center; justify-content:center; font-family:'Josefin Sans',sans-serif; font-weight:700; color:white; font-size:1rem; z-index:2;">{i+1}</div>
+          {#if i < steps.length - 1}<div style="width:2px; flex:1; background:var(--gray-200);"></div>{/if}
+        </div>
+        <div style="padding-bottom:2rem;">
+          <div style="background:var(--white); border:1px solid var(--gray-200); border-left:3px solid #5C6B4E; padding:1.25rem;">
+            <span style="font-size:0.65rem; font-family:'Josefin Sans',sans-serif; letter-spacing:0.1em; color:#5C6B4E; text-transform:uppercase;">{step.t}</span>
+            <h3 style="font-size:1.05rem; color:var(--teal); margin:0.2rem 0 0.4rem;">{step.title}</h3>
+            <p style="font-size:0.85rem; color:var(--gray-500); line-height:1.6; margin-bottom:0.75rem;">{step.desc}</p>
+            {#each step.tasks as task}<div style="display:flex; gap:0.4rem; margin-bottom:0.3rem;"><span style="color:#5C6B4E; font-size:0.8rem;">✓</span><span style="font-size:0.8rem; color:var(--gray-700); line-height:1.4;">{task}</span></div>{/each}
+            {#if step.tip}<div style="margin-top:0.75rem; padding:0.6rem; background:rgba(92,107,78,0.06); border-left:2px solid #5C6B4E;"><p style="font-size:0.75rem; color:var(--teal); margin:0;"><strong>Tipp:</strong> {step.tip}</p></div>{/if}
           </div>
         </div>
-      {/each}
-    </div>
+      </div>
+    {/each}
   </div>
 </section>
 
 <!-- CTA -->
-<section class="section-dark" style="padding:4rem 2rem; text-align:center;">
+<section style="background:var(--teal); padding:4rem 2rem; text-align:center;">
   <h2 style="color:var(--white); font-size:1.5rem; margin:0 0 0.75rem;">Ein Mitbringsel, das bleibt.</h2>
   <p style="color:rgba(255,255,255,0.5); margin-bottom:1.5rem;">Fordern Sie unser Lookbook mit Designer-Story und Bildmaterial an.</p>
   <a href="#" onclick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} class="btn-primary">Lookbook anfordern →</a>
 </section>
 
 <footer style="background:var(--teal); border-top:1px solid rgba(255,255,255,0.08); padding:2rem; text-align:center;">
-  <a href="/" style="text-decoration:none;"><p class="fireball-brand" style="color:var(--gold); font-size:1rem; margin-bottom:0.5rem;">FIREBALL</p></a>
+  <p class="fireball-brand" style="color:var(--gold); font-size:1rem; margin-bottom:0.5rem;">FIREBALL</p>
   <p style="font-size:0.75rem; color:rgba(255,255,255,0.35);">© 2026 VICI Vertrieb Deutschland GmbH</p>
 </footer>
 
 <style>
-  @media (max-width: 768px) {
-    section:first-of-type > div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
-    div[style*="grid-template-columns:repeat(3"] { grid-template-columns: 1fr !important; }
-  }
+  @media (max-width: 768px) { section > div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; } }
 </style>
