@@ -1,6 +1,105 @@
 <script lang="ts">
   import Navbar from '$lib/components/Navbar.svelte';
   import LeadForm from '$lib/components/LeadForm.svelte';
+
+  const steps = [
+    {
+      timing: 'Tag 1',
+      title: 'ROI-Kalkulation anfordern',
+      active: true,
+      description: 'Füllen Sie das Formular aus. Wir erstellen eine individuelle Produktivitätsrechnung für Ihre spezifische Fläche und Frequenz.',
+      tasks: [
+        'Formular mit Haus-Name, Abteilung und Kontakt des Einkaufs ausfüllen',
+        'Angaben zur geschätzten Kundenfrequenz in der Schmuck-/Accessoire-Abteilung',
+        'Sie erhalten: Individuelle ROI-Kalkulation (konservativ + optimistisch)',
+        'Factsheet mit bewiesenen Produktivitätszahlen aus bestehenden Teststellungen',
+        'Übersicht: Display-Optionen, SKU-Struktur, EDI-Anbindung',
+        'Case Study von vergleichbaren Standorten als Referenz',
+      ],
+      tip: 'Je genauer Ihre Frequenzschätzung, desto präziser unsere Kalkulation. Tagesfrequenz in der Abteilung reicht — wir rechnen den Rest.'
+    },
+    {
+      timing: 'Tag 3–5',
+      title: 'Präsentation beim Einkauf',
+      active: true,
+      description: 'Persönliche Präsentation (vor Ort oder Video-Call, 30 Minuten) mit Ihrem Einkaufs-Team.',
+      tasks: [
+        'Vorstellung des FIREBALL Konzepts: Produkt, Display, Nachbestellung',
+        'Durchsprache der individuellen ROI-Kalkulation für Ihr Haus',
+        'Display-Optionen im Detail: D18 (kompakt) vs. D21 (Standard) vs. Maßanfertigung',
+        'Logistik: EDI-Anbindung, Bestell-App, Lieferzeiten, Mindestmengen',
+        'Konditionen: WS-Preise, Zahlungsziele, Rücknahme-Regelung im Pilot',
+        'Pilotprogramm besprechen: Anzahl Filialen, Laufzeit, Erfolgskriterien',
+        'Klärung interner Prozesse: Warenwirtschaft, Artikelanlage, Regalplanung',
+      ],
+      tip: 'Bringen Sie Ihren Flächenplaner und Warenwirtschafts-Verantwortlichen mit — wir haben alle technischen Daten für die Artikelanlage vorbereitet.'
+    },
+    {
+      timing: 'Woche 2',
+      title: 'Pilotprogramm definieren',
+      active: true,
+      description: 'Gemeinsam legen wir den Piloten fest: Welche Filialen, welche Displays, welche Erfolgskriterien.',
+      tasks: [
+        'Auswahl von 1–3 Pilot-Filialen (unterschiedliche Frequenz/Lage empfohlen)',
+        'Display-Variante pro Standort festlegen (D18 oder D21)',
+        'Farbsortiment pro Display zusammenstellen (Empfehlung basierend auf Region)',
+        'Platzierung definieren: Kassentheke, Schmuck-Abteilung oder Eingangsbereich',
+        'KPI-Definition: Tagesverkäufe, Umsatz/m², Nachbestellfrequenz',
+        'Reporting-Rhythmus vereinbaren: Wöchentlich oder monatlich',
+        'Artikelanlage in Ihrem System: Wir liefern alle Stammdaten (EAN, VK, Maße)',
+      ],
+      tip: 'Wählen Sie eine Filiale mit hoher und eine mit mittlerer Frequenz — so sehen Sie den Frequenz-Hebel direkt in den Zahlen.'
+    },
+    {
+      timing: 'Woche 3–4',
+      title: 'Displays aufstellen & Teams briefen',
+      active: false,
+      description: 'Die Displays werden geliefert und aufgestellt. Jedes Filial-Team erhält ein kompaktes Briefing.',
+      tasks: [
+        'Fertig bestückte Displays per Paket an jede Pilot-Filiale',
+        'Aufstellung am vereinbarten Standort (5 Minuten, kein Werkzeug)',
+        'Team-Schulung per Video-Link (5 Minuten): Produkt, Argumente, Nachbestellung',
+        'Kernbotschaft für das Team: „Die Frage ist nicht ob, sondern welche Farbe"',
+        'POS-Material pro Filiale: Aufsteller, Preisschild, Farbkarte',
+        'Ansprechpartner für jede Filiale benennen (für Feedback und Nachbestellung)',
+        'Bestell-App oder EDI-Zugang einrichten und testen',
+      ],
+      tip: 'Idealerweise besucht ein FIREBALL-Mitarbeiter die Pilot-Filialen persönlich zum Aufstellen — das zeigt Commitment und motiviert das Team.'
+    },
+    {
+      timing: 'Monat 1–3',
+      title: '3-Monats-Pilot mit Performance-Tracking',
+      active: false,
+      description: 'Drei Monate datengetriebener Testbetrieb. Wir liefern monatliche Reports, Sie liefern die Verkaufszahlen.',
+      tasks: [
+        'Monat 1: Startphase — erste Verkaufsdaten, Kalibrierung, Team-Feedback einholen',
+        'Monat 2: Optimierung — Farbsortiment anpassen, Platzierung ggf. korrigieren',
+        'Monat 3: Skalierungs-Entscheidung — datenbasierte Empfehlung für Roll-out',
+        'Monatlicher Performance-Report pro Filiale: Stück, Umsatz, Farb-Ranking',
+        'Vergleichsanalyse zwischen den Pilot-Filialen: Was macht den Unterschied?',
+        'Nachbestellungen automatisch über EDI oder App tracken',
+        'Kundenfeedback dokumentieren: Sammeln Kundinnen? Verschenken sie?',
+      ],
+      tip: 'Die Erfahrung zeigt: Monat 2 ist meist besser als Monat 1, weil das Team sicherer wird und Stammkundinnen wiederkommen.'
+    },
+    {
+      timing: 'Ab Monat 4',
+      title: 'Roll-out & Skalierung',
+      active: false,
+      description: 'Nach erfolgreichem Pilot: Schrittweises Roll-out auf weitere Filialen mit optimiertem Konzept.',
+      tasks: [
+        'Auswertung: Welche Filialen, Platzierungen und Farbkonzepte funktionieren am besten?',
+        'Roll-out Plan: Phasenweise Ausweitung auf 5, 10, 20+ Filialen',
+        'Optimiertes Farbsortiment basierend auf Pilot-Daten',
+        'EDI-Vollintegration: Automatische Nachbestellung bei Mindestbestand',
+        'Cross-Selling Pipeline aktivieren: Ketten, Ringe, Armbänder als Erweiterung',
+        'Quartals-Business-Review: Performance, Trends, Sortimentsplanung',
+        'Staffelkonditionen: Bessere WS-Preise bei höherem Volumen',
+        'Jahresplanung: Saisonale Farbkollektionen, Aktions-Displays, Promotion-Slots',
+      ],
+      tip: 'Top-Filialen erreichen 3,8 Verkäufe pro Tag — das sind über 50.000€ Jahresnetto auf 0,2m². Ein Wert, den kaum ein anderes Sortiment schafft.'
+    },
+  ];
 </script>
 
 <svelte:head>
@@ -93,6 +192,66 @@
         <div style="font-family:'Josefin Sans',sans-serif; font-size:2rem; color:var(--teal); font-weight:700;">3</div>
         <p style="font-size:0.85rem; color:var(--gray-500);">Skalieren nach Zahlen</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHRITT FÜR SCHRITT -->
+<section class="section-cream" style="padding:5rem 2rem;">
+  <div style="max-width:900px; margin:0 auto;">
+    <p style="font-family:'Josefin Sans',sans-serif; color:var(--gold); font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.75rem; text-align:center;">
+      Vom Pilot zum Roll-out
+    </p>
+    <h2 style="font-size:clamp(1.6rem, 3vw, 2rem); margin:0 0 1rem; text-align:center;">
+      Schritt für Schritt: Ihr Pilotprogramm
+    </h2>
+    <p style="color:var(--gray-500); text-align:center; max-width:600px; margin:0 auto 3rem; line-height:1.7;">
+      Datengetrieben und risikofrei — so integrieren Sie FIREBALL in Ihr Sortiment.
+    </p>
+
+    <div style="display:flex; flex-direction:column; gap:0;">
+      {#each steps as step, i}
+        <div style="display:grid; grid-template-columns:64px 1fr; gap:1.5rem; position:relative;">
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div style="
+              width:48px; height:48px; border-radius:50%;
+              background:{step.active ? 'var(--gold)' : 'var(--white)'};
+              border:2px solid {step.active ? 'var(--gold)' : 'var(--gray-200)'};
+              display:flex; align-items:center; justify-content:center;
+              font-family:'Josefin Sans',sans-serif; font-weight:700;
+              color:{step.active ? 'var(--teal)' : 'var(--gray-500)'};
+              font-size:1.1rem; z-index:2;
+            ">{i + 1}</div>
+            {#if i < steps.length - 1}
+              <div style="width:2px; flex:1; background:var(--gray-200); min-height:20px;"></div>
+            {/if}
+          </div>
+          <div style="padding-bottom:2.5rem;">
+            <div style="
+              background:var(--white); border:1px solid var(--gray-200);
+              border-left:3px solid {step.active ? '#2C5F7C' : 'var(--gray-200)'};
+              padding:1.5rem;
+            ">
+              <span style="font-size:0.7rem; font-family:'Josefin Sans',sans-serif; letter-spacing:0.1em; color:#2C5F7C; text-transform:uppercase;">{step.timing}</span>
+              <h3 style="font-size:1.1rem; color:var(--teal); margin:0.25rem 0 0.5rem;">{step.title}</h3>
+              <p style="font-size:0.9rem; color:var(--gray-500); line-height:1.7; margin-bottom:1rem;">{step.description}</p>
+              <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                {#each step.tasks as task}
+                  <div style="display:flex; align-items:flex-start; gap:0.5rem;">
+                    <span style="color:#2C5F7C; font-size:0.85rem; margin-top:2px;">✓</span>
+                    <span style="font-size:0.85rem; color:var(--gray-700); line-height:1.5;">{task}</span>
+                  </div>
+                {/each}
+              </div>
+              {#if step.tip}
+                <div style="margin-top:1rem; padding:0.75rem 1rem; background:rgba(44,95,124,0.05); border-left:2px solid #2C5F7C;">
+                  <p style="font-size:0.8rem; color:var(--teal); margin:0;"><strong>💡 Tipp:</strong> {step.tip}</p>
+                </div>
+              {/if}
+            </div>
+          </div>
+        </div>
+      {/each}
     </div>
   </div>
 </section>
