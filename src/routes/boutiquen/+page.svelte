@@ -2,8 +2,10 @@
   import Navbar from '$lib/components/Navbar.svelte';
   import LeadForm from '$lib/components/LeadForm.svelte';
   import PriceGate from '$lib/components/PriceGate.svelte';
+  import PriceWall from '$lib/components/PriceWall.svelte';
   let unlocked = $state(false);
-  let blur = $derived(unlocked ? '' : 'filter:blur(5px);user-select:none;');
+  let showGate = $state(false);
+  function openGate() { showGate = true; }
   const steps = [
     { t: 'Tag 1', title: 'Info-Paket anfordern', desc: 'Formular ausfüllen → Factsheet, Lookbook, Preisliste und Farbkatalog per E-Mail innerhalb 24h.', tasks: ['Factsheet mit Produktivitätszahlen und ROI', 'Hochauflösende Produktfotos und Display-Bilder', 'Preisliste mit WS-Konditionen', 'Übersicht 21+ Farbvarianten für Displays'], tip: 'Je mehr wir über Ihren Store wissen, desto besser schneiden wir das Display zu.' },
     { t: 'Tag 2–3', title: 'Persönliches Beratungsgespräch', desc: '15-Minuten Call: Store-Situation, Display-Auswahl, Farbkonzept, Platzierung.', tasks: ['D18 (kompakt, 18 SKU) oder D21 (voll, 21 SKU)?', 'Farbauswahl passend zu Kundschaft und Saison', 'Platzierung: Kasse, Schaufenster oder freistehend?', 'Testphase-Bedingungen besprechen'], tip: 'Senden Sie vorab ein Foto Ihres Kassenbereichs — sofortige Platzierungsempfehlung.' },
@@ -31,9 +33,9 @@
       <div>
         <p class="animate-fade-up" style="font-family:'Josefin Sans',sans-serif; color:var(--gold); font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:1rem;">Für Modeboutiquen & Concept Stores</p>
         <h1 class="animate-fade-up delay-100" style="font-size:clamp(2.2rem,4.5vw,3.2rem); font-weight:700; color:var(--white); line-height:1.1; margin:0 0 1.5rem;">Der Impulskauf, den Ihre Kundinnen <span style="color:var(--gold);">sammeln.</span></h1>
-        <p class="animate-fade-up delay-200" style="font-size:1.1rem; color:rgba(255,255,255,0.7); line-height:1.7; margin-bottom:2.5rem;">280+ Farben, handgefertigt, <span style="{blur}">39,90–49,90€</span>. Kundinnen besitzen 30, 50, manchmal über 100 verschiedene Paare. Das bedeutet: garantierter Wiederkauf.</p>
+        <p class="animate-fade-up delay-200" style="font-size:1.1rem; color:rgba(255,255,255,0.7); line-height:1.7; margin-bottom:2.5rem;">280+ Farben, handgefertigt, 39,90–49,90€. Kundinnen besitzen 30, 50, manchmal über 100 verschiedene Paare. Das bedeutet: garantierter Wiederkauf.</p>
         <div class="animate-fade-up delay-300" style="display:flex; gap:2.5rem;">
-          <div><div class="stat-number" style="font-size:2rem;{blur}">49,90€</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">RPR Classic</div></div>
+          <div><div class="stat-number" style="font-size:2rem;">49,90€</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">RPR Classic</div></div>
           <div><div class="stat-number" style="font-size:2rem;">~2/Tag</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">Ø Verkäufe</div></div>
           <div><div class="stat-number" style="font-size:2rem;">0,2m²</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">Platzbedarf</div></div>
         </div>
@@ -80,18 +82,20 @@
     <h2 style="font-size:1.8rem; text-align:center; margin:0 0 1rem;">Zwei Display-Optionen — offen für Anpassungen</h2>
     <p style="color:var(--gray-500); text-align:center; margin-bottom:2rem;">Individuell an Ihren POS anpassbar in Form und Farbe.</p>
     <img src="/img/5.jpeg" alt="FIREBALL Displays D21 und D18" style="width:100%; border:1px solid var(--gray-200);" />
+<PriceWall {unlocked} onunlock={openGate}>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem;">
       <div style="background:var(--teal); padding:2rem; color:var(--white);">
         <h3 style="color:var(--gold); font-size:1.2rem; margin:0 0 1rem;">D21 Display Black</h3>
         <p style="opacity:0.7; font-size:0.9rem; margin:0 0 0.25rem;">45 × 35 × 35 cm · 21 SKU / 63 Stück · 15 Farben / 2 Größen</p>
-        <p style="font-family:'Josefin Sans',sans-serif; color:var(--gold); font-size:1.2rem; margin:1rem 0 0;{blur}">WS 1.174€ · RRP 3.054€</p>
+        <p style="font-family:'Josefin Sans',sans-serif; color:var(--gold); font-size:1.2rem; margin:1rem 0 0;">WS 1.174€ · RRP 3.054€</p>
       </div>
       <div style="background:var(--cream); padding:2rem;">
         <h3 style="color:var(--teal); font-size:1.2rem; margin:0 0 1rem;">D18 Display White</h3>
         <p style="color:var(--gray-500); font-size:0.9rem; margin:0 0 0.25rem;">34 × 34 × 21 cm · 18 SKU / 45 Stück · 9 Farben / 2 Größen</p>
-        <p style="font-family:'Josefin Sans',sans-serif; color:var(--gold); font-size:1.2rem; margin:1rem 0 0;{blur}">WS 931,50€ · RRP 2.424,60€</p>
+        <p style="font-family:'Josefin Sans',sans-serif; color:var(--gold); font-size:1.2rem; margin:1rem 0 0;">WS 931,50€ · RRP 2.424,60€</p>
       </div>
     </div>
+</PriceWall>
   </div>
 </section>
 
@@ -114,8 +118,8 @@
             <span style="font-size:0.65rem; font-family:'Josefin Sans',sans-serif; letter-spacing:0.1em; color:var(--gold); text-transform:uppercase;">{step.t}</span>
             <h3 style="font-size:1.05rem; color:var(--teal); margin:0.2rem 0 0.4rem;">{step.title}</h3>
             <p style="font-size:0.85rem; color:var(--gray-500); line-height:1.6; margin-bottom:0.75rem;">{step.desc}</p>
-            {#each step.tasks as task}<div style="display:flex; gap:0.4rem; margin-bottom:0.3rem;"><span style="color:var(--gold); font-size:0.8rem;">✓</span><span style="font-size:0.8rem; color:var(--gray-700); line-height:1.4;{task.includes('€') ? blur : ''}">{task}</span></div>{/each}
-            {#if step.tip}<div style="margin-top:0.75rem; padding:0.6rem 0.75rem; background:rgba(200,169,81,0.08); border-left:2px solid var(--gold);"><p style="font-size:0.75rem; color:var(--teal); margin:0;{step.tip?.includes('€') ? blur : ''}"><strong>Tipp:</strong> {step.tip}</p></div>{/if}
+            {#each step.tasks as task}<div style="display:flex; gap:0.4rem; margin-bottom:0.3rem;"><span style="color:var(--gold); font-size:0.8rem;">✓</span><span style="font-size:0.8rem; color:var(--gray-700); line-height:1.4;">{task}</span></div>{/each}
+            {#if step.tip}<div style="margin-top:0.75rem; padding:0.6rem 0.75rem; background:rgba(200,169,81,0.08); border-left:2px solid var(--gold);"><p style="font-size:0.75rem; color:var(--teal); margin:0;"><strong>Tipp:</strong> {step.tip}</p></div>{/if}
           </div>
         </div>
       </div>
@@ -130,7 +134,7 @@
   <a href="#" onclick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} class="btn-primary">Probedisplay anfordern →</a>
 </section>
 
-<PriceGate bind:unlocked />
+{#if showGate && !unlocked}<PriceGate bind:unlocked onclose={() => showGate = false} />{/if}
 
 <footer style="background:var(--teal); border-top:1px solid rgba(255,255,255,0.08); padding:2rem; text-align:center;">
   <p class="fireball-brand" style="color:var(--gold); font-size:1rem; margin-bottom:0.5rem;">FIREBALL</p>

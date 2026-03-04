@@ -2,8 +2,10 @@
   import Navbar from '$lib/components/Navbar.svelte';
   import LeadForm from '$lib/components/LeadForm.svelte';
   import PriceGate from '$lib/components/PriceGate.svelte';
+  import PriceWall from '$lib/components/PriceWall.svelte';
   let unlocked = $state(false);
-  let blur = $derived(unlocked ? '' : 'filter:blur(5px);user-select:none;');
+  let showGate = $state(false);
+  function openGate() { showGate = true; }
   const steps = [
     { t: 'Tag 1', title: 'Muster-Paket anfordern', desc: 'Formular ausfüllen → 3 Muster-Sticks in verschiedenen Farben kostenlos per Express.', tasks: ['Beauty-spezifisches Factsheet per E-Mail', 'Stick-Lifestyle-Bilder neben Lippenstiften und Parfums', 'Preisliste für Beauty-Fachhandel', 'Saisonale Farbempfehlungen'], tip: 'Erwähnen Sie Ihr Sortiment — wir empfehlen Farben, die zu Ihrem Beauty-Angebot passen.' },
     { t: 'Tag 2–4', title: '3 Muster-Sticks testen', desc: 'Sticks auspacken, anfassen, neben Ihre Lippenstifte legen. Stammkundinnen zeigen und Reaktion beobachten.', tasks: ['Stick-Format neben Lippenstifte legen — passt ins Bild?', '2–3 Stammkundinnen zeigen und Feedback einholen', 'Stick öffnen: Ohrring entnehmen, anschauen, zurücklegen', 'Kurzanleitung für Ihr Team beiliegend (1 Seite)'], tip: 'Häufigste Reaktion: Kundinnen greifen instinktiv zum Stick — das Format ist so vertraut wie ein Lippenstift.' },
@@ -34,7 +36,7 @@
         <p class="animate-fade-up delay-200" style="font-size:1.1rem; color:rgba(255,255,255,0.7); line-height:1.7; margin-bottom:1rem;">Der FIREBALL Stick passt ins Beauty-Regal wie ein Lippenstift. Vertrautes Format, neues Produkt. Und wenn die Konjunktur stockt, steigt der Absatz für Beauty-Produkte — der „Lipstick Effect".</p>
         <p class="animate-fade-up delay-200" style="font-size:1rem; font-style:italic; color:rgba(255,255,255,0.5); margin-bottom:2rem;">„...wie mein Lippenstift, immer dabei."</p>
         <div class="animate-fade-up delay-300" style="display:flex; gap:2.5rem;">
-          <div><div class="stat-number" style="font-size:2rem;{blur}">39,90€</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">RPR Small</div></div>
+          <div><div class="stat-number" style="font-size:2rem;">39,90€</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">RPR Small</div></div>
           <div><div class="stat-number" style="font-size:2rem;">280+</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">Farben</div></div>
           <div><div class="stat-number" style="font-size:2rem;">0 Abfall</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">Stick = Verpackung</div></div>
         </div>
@@ -89,16 +91,18 @@
   <div style="max-width:1100px; margin:0 auto;">
     <h2 style="font-size:1.5rem; text-align:center; margin:0 0 2rem; color:var(--teal);">Displays — offen für Anpassungen</h2>
     <img src="/img/5.jpeg" alt="FIREBALL Displays" style="width:100%; border:1px solid var(--gray-200);" />
+<PriceWall {unlocked} onunlock={openGate}>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem;">
       <div style="background:var(--teal); padding:1.5rem; color:var(--white);">
         <h3 style="color:var(--gold); font-size:1.1rem; margin:0 0 0.5rem;">D21 Display Black</h3>
-        <p style="opacity:0.7; font-size:0.85rem; margin:0;{blur}">45×35×35cm · 21 SKU / 63 PCS · WS 1.174€</p>
+        <p style="opacity:0.7; font-size:0.85rem; margin:0;">45×35×35cm · 21 SKU / 63 PCS · WS 1.174€</p>
       </div>
       <div style="background:var(--white); padding:1.5rem; border:1px solid var(--gray-200);">
         <h3 style="color:var(--teal); font-size:1.1rem; margin:0 0 0.5rem;">D18 Display White</h3>
-        <p style="color:var(--gray-500); font-size:0.85rem; margin:0;{blur}">34×34×21cm · 18 SKU / 45 PCS · WS 931,50€</p>
+        <p style="color:var(--gray-500); font-size:0.85rem; margin:0;">34×34×21cm · 18 SKU / 45 PCS · WS 931,50€</p>
       </div>
     </div>
+</PriceWall>
   </div>
 </section>
 
@@ -117,8 +121,8 @@
             <span style="font-size:0.65rem; font-family:'Josefin Sans',sans-serif; letter-spacing:0.1em; color:#9B4D6E; text-transform:uppercase;">{step.t}</span>
             <h3 style="font-size:1.05rem; color:var(--teal); margin:0.2rem 0 0.4rem;">{step.title}</h3>
             <p style="font-size:0.85rem; color:var(--gray-500); line-height:1.6; margin-bottom:0.75rem;">{step.desc}</p>
-            {#each step.tasks as task}<div style="display:flex; gap:0.4rem; margin-bottom:0.3rem;"><span style="color:#9B4D6E; font-size:0.8rem;">✓</span><span style="font-size:0.8rem; color:var(--gray-700); line-height:1.4;{task.includes('€') ? blur : ''}">{task}</span></div>{/each}
-            {#if step.tip}<div style="margin-top:0.75rem; padding:0.6rem; background:rgba(155,77,110,0.06); border-left:2px solid #9B4D6E;"><p style="font-size:0.75rem; color:var(--teal); margin:0;{step.tip?.includes('€') ? blur : ''}"><strong>Tipp:</strong> {step.tip}</p></div>{/if}
+            {#each step.tasks as task}<div style="display:flex; gap:0.4rem; margin-bottom:0.3rem;"><span style="color:#9B4D6E; font-size:0.8rem;">✓</span><span style="font-size:0.8rem; color:var(--gray-700); line-height:1.4;">{task}</span></div>{/each}
+            {#if step.tip}<div style="margin-top:0.75rem; padding:0.6rem; background:rgba(155,77,110,0.06); border-left:2px solid #9B4D6E;"><p style="font-size:0.75rem; color:var(--teal); margin:0;"><strong>Tipp:</strong> {step.tip}</p></div>{/if}
           </div>
         </div>
       </div>
@@ -133,7 +137,7 @@
   <a href="#" onclick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} class="btn-primary">Muster-Paket anfordern →</a>
 </section>
 
-<PriceGate bind:unlocked />
+{#if showGate && !unlocked}<PriceGate bind:unlocked onclose={() => showGate = false} />{/if}
 
 <footer style="background:var(--teal); border-top:1px solid rgba(255,255,255,0.08); padding:2rem; text-align:center;">
   <p class="fireball-brand" style="color:var(--gold); font-size:1rem; margin-bottom:0.5rem;">FIREBALL</p>

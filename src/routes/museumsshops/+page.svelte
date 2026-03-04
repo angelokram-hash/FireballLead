@@ -2,8 +2,10 @@
   import Navbar from '$lib/components/Navbar.svelte';
   import LeadForm from '$lib/components/LeadForm.svelte';
   import PriceGate from '$lib/components/PriceGate.svelte';
+  import PriceWall from '$lib/components/PriceWall.svelte';
   let unlocked = $state(false);
-  let blur = $derived(unlocked ? '' : 'filter:blur(5px);user-select:none;');
+  let showGate = $state(false);
+  function openGate() { showGate = true; }
   const steps = [
     { t: 'Tag 1', title: 'Lookbook & Konditionen anfordern', desc: 'Formular ausfüllen → Lookbook mit Designer-Story, Manufaktur-Fotos und Sonderkonditionen.', tasks: ['Lookbook mit hochauflösenden Lifestyle-Fotos', 'Designer-Story von Miranda Konstantinidou', 'Manufaktur-Bilder: Handarbeit in Cebu', 'Sonderkonditionen für Kultureinrichtungen'], tip: 'Erwähnen Sie den thematischen Kontext — wir empfehlen Farben passend zu Ihrer Ausstellung.' },
     { t: 'Tag 3–5', title: 'Beratung: Das richtige Konzept', desc: 'Call (15–20 Min): FIREBALL als Design-Souvenir oder Geschenk-Sortiment? Display, Farben, Story-Karte.', tasks: ['Analyse: Besucherprofil, Durchschnittsbon, Sortiment', 'Konzept: Souvenir oder Geschenk-Sortiment?', 'Story-Karte A5: Designer- und Manufaktur-Geschichte', 'QR-Code für Manufaktur-Video (optional)'], tip: 'Shops mit guter Produkt-Story verkaufen bis zu 40% mehr.' },
@@ -69,9 +71,11 @@
   <div style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center;">
     <img src="/img/10.jpeg" alt="FIREBALL Stick" style="width:100%; border:1px solid var(--gray-200);" />
     <div>
+<PriceWall {unlocked} onunlock={openGate}>
       <h2 style="font-size:1.5rem; color:var(--teal); margin:0 0 1rem;">Geschenkfertig im Stick</h2>
       <p style="font-size:0.95rem; color:var(--gray-500); line-height:1.7; margin-bottom:1rem;">Die Stick-Verpackung ist gleichzeitig Präsentation, Verpackung und Reise-Etui. Kein zusätzliches Geschenkpapier nötig. Kein Abfall.</p>
-      <p style="font-size:0.95rem; color:var(--gray-500); line-height:1.7;">Ideal als Mitbringsel: kompakt, elegant, mit einer Geschichte, die man weitererzählen kann.</p>
+      <p style="font-size:0.95rem; color:var(--gray-500); line-height:1.7;">Preis: 39,90–49,90€ — der perfekte Impuls-Preis. Ideal als Mitbringsel: kompakt, elegant, mit einer Geschichte.</p>
+</PriceWall>
     </div>
   </div>
 </section>
@@ -91,8 +95,8 @@
             <span style="font-size:0.65rem; font-family:'Josefin Sans',sans-serif; letter-spacing:0.1em; color:#5C6B4E; text-transform:uppercase;">{step.t}</span>
             <h3 style="font-size:1.05rem; color:var(--teal); margin:0.2rem 0 0.4rem;">{step.title}</h3>
             <p style="font-size:0.85rem; color:var(--gray-500); line-height:1.6; margin-bottom:0.75rem;">{step.desc}</p>
-            {#each step.tasks as task}<div style="display:flex; gap:0.4rem; margin-bottom:0.3rem;"><span style="color:#5C6B4E; font-size:0.8rem;">✓</span><span style="font-size:0.8rem; color:var(--gray-700); line-height:1.4;{task.includes('€') ? blur : ''}">{task}</span></div>{/each}
-            {#if step.tip}<div style="margin-top:0.75rem; padding:0.6rem; background:rgba(92,107,78,0.06); border-left:2px solid #5C6B4E;"><p style="font-size:0.75rem; color:var(--teal); margin:0;{step.tip?.includes('€') ? blur : ''}"><strong>Tipp:</strong> {step.tip}</p></div>{/if}
+            {#each step.tasks as task}<div style="display:flex; gap:0.4rem; margin-bottom:0.3rem;"><span style="color:#5C6B4E; font-size:0.8rem;">✓</span><span style="font-size:0.8rem; color:var(--gray-700); line-height:1.4;">{task}</span></div>{/each}
+            {#if step.tip}<div style="margin-top:0.75rem; padding:0.6rem; background:rgba(92,107,78,0.06); border-left:2px solid #5C6B4E;"><p style="font-size:0.75rem; color:var(--teal); margin:0;"><strong>Tipp:</strong> {step.tip}</p></div>{/if}
           </div>
         </div>
       </div>
@@ -107,7 +111,7 @@
   <a href="#" onclick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} class="btn-primary">Lookbook anfordern →</a>
 </section>
 
-<PriceGate bind:unlocked />
+{#if showGate && !unlocked}<PriceGate bind:unlocked />{/if}
 
 <footer style="background:var(--teal); border-top:1px solid rgba(255,255,255,0.08); padding:2rem; text-align:center;">
   <p class="fireball-brand" style="color:var(--gold); font-size:1rem; margin-bottom:0.5rem;">FIREBALL</p>
