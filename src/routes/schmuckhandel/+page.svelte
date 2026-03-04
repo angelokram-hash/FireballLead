@@ -1,6 +1,9 @@
 <script lang="ts">
   import Navbar from '$lib/components/Navbar.svelte';
   import LeadForm from '$lib/components/LeadForm.svelte';
+  import PriceGate from '$lib/components/PriceGate.svelte';
+  let unlocked = $state(false);
+  let blur = $derived(unlocked ? '' : 'filter:blur(5px);user-select:none;');
   const steps = [
     { t: 'Tag 1', title: 'Produktivitätsrechner anfordern', desc: 'Formular ausfüllen → interaktiver Rechner: Ihre Frequenz = Ihr Jahresumsatz.', tasks: ['Interaktiver Produktivitätsrechner (Excel/Online)', 'Factsheet: FIREBALL ergänzt, ersetzt nicht', 'Farbkatalog mit Kristallstein-Details', 'Preisliste mit Staffel-Rabatten für Fachhandel'], tip: 'Schon 1 Verkauf/Tag = ca. 15.000€ Jahresumsatz auf 0,2m².' },
     { t: 'Tag 3–5', title: 'Fachgespräch unter Profis', desc: 'Telefonat oder Besuch (20 Min). Sortiment-Einordnung, Größen, Finishes, Cross-Selling.', tasks: ['Wo liegt der FIREBALL preislich und stilistisch?', 'FIREBALL als Impulsware auf der Theke, nicht im Schaufenster', 'Classic (21mm, 49,90€) und Small (16mm, 39,90€)', 'Brass (matt) vs. Shiny Golden (glänzend, limitiert)', 'Cross-Selling Pipeline: Ketten, Ringe, Armbänder'], tip: 'Für Juweliere: Start mit D18 in gedeckten Farbtönen passt zum gehobenen Umfeld.' },
@@ -98,8 +101,8 @@
             <span style="font-size:0.65rem; font-family:'Josefin Sans',sans-serif; letter-spacing:0.1em; color:#6B5B73; text-transform:uppercase;">{step.t}</span>
             <h3 style="font-size:1.05rem; color:var(--teal); margin:0.2rem 0 0.4rem;">{step.title}</h3>
             <p style="font-size:0.85rem; color:var(--gray-500); line-height:1.6; margin-bottom:0.75rem;">{step.desc}</p>
-            {#each step.tasks as task}<div style="display:flex; gap:0.4rem; margin-bottom:0.3rem;"><span style="color:#6B5B73; font-size:0.8rem;">✓</span><span style="font-size:0.8rem; color:var(--gray-700); line-height:1.4;">{task}</span></div>{/each}
-            {#if step.tip}<div style="margin-top:0.75rem; padding:0.6rem; background:rgba(107,91,115,0.05); border-left:2px solid #6B5B73;"><p style="font-size:0.75rem; color:var(--teal); margin:0;"><strong>Tipp:</strong> {step.tip}</p></div>{/if}
+            {#each step.tasks as task}<div style="display:flex; gap:0.4rem; margin-bottom:0.3rem;"><span style="color:#6B5B73; font-size:0.8rem;">✓</span><span style="font-size:0.8rem; color:var(--gray-700); line-height:1.4;{task.includes('€') ? blur : ''}">{task}</span></div>{/each}
+            {#if step.tip}<div style="margin-top:0.75rem; padding:0.6rem; background:rgba(107,91,115,0.05); border-left:2px solid #6B5B73;"><p style="font-size:0.75rem; color:var(--teal); margin:0;{step.tip?.includes('€') ? blur : ''}"><strong>Tipp:</strong> {step.tip}</p></div>{/if}
           </div>
         </div>
       </div>
@@ -113,6 +116,8 @@
   <p style="color:rgba(255,255,255,0.5); margin-bottom:1.5rem;">Fordern Sie Ihren individuellen Produktivitätsrechner an.</p>
   <a href="#" onclick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} class="btn-primary">Produktivitätsrechner anfordern →</a>
 </section>
+
+<PriceGate bind:unlocked />
 
 <footer style="background:var(--teal); border-top:1px solid rgba(255,255,255,0.08); padding:2rem; text-align:center;">
   <p class="fireball-brand" style="color:var(--gold); font-size:1rem; margin-bottom:0.5rem;">FIREBALL</p>

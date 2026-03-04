@@ -1,6 +1,9 @@
 <script lang="ts">
   import Navbar from '$lib/components/Navbar.svelte';
   import LeadForm from '$lib/components/LeadForm.svelte';
+  import PriceGate from '$lib/components/PriceGate.svelte';
+  let unlocked = $state(false);
+  let blur = $derived(unlocked ? '' : 'filter:blur(5px);user-select:none;');
   const steps = [
     { t: 'Tag 1', title: 'ROI-Kalkulation anfordern', desc: 'Formular ausfüllen → individuelle Produktivitätsrechnung für Ihre Fläche und Frequenz.', tasks: ['Individuelle ROI-Kalkulation (konservativ + optimistisch)', 'Factsheet mit bewiesenen Produktivitätszahlen', 'Display-Optionen, SKU-Struktur, EDI-Anbindung', 'Case Study von vergleichbaren Standorten'], tip: 'Tagesfrequenz in der Abteilung reicht — wir rechnen den Rest.' },
     { t: 'Tag 3–5', title: 'Präsentation beim Einkauf', desc: 'Persönliche Präsentation (30 Min) mit ROI-Kalkulation, Display-Optionen und Pilotprogramm.', tasks: ['FIREBALL Konzept: Produkt, Display, Nachbestellung', 'Logistik: EDI-Anbindung, Bestell-App, Lieferzeiten', 'Konditionen: WS-Preise, Zahlungsziele, Rücknahme', 'Pilotprogramm: Filialen, Laufzeit, Erfolgskriterien'], tip: 'Bringen Sie Flächenplaner und WaWi-Verantwortlichen mit — alle Stammdaten liegen bereit.' },
@@ -27,11 +30,11 @@
     <div style="display:grid; grid-template-columns:1fr 420px; gap:4rem; align-items:center;">
       <div>
         <p class="animate-fade-up" style="font-family:'Josefin Sans',sans-serif; color:var(--gold); font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:1rem;">Für Kaufhäuser & Department Stores</p>
-        <h1 class="animate-fade-up delay-100" style="font-size:clamp(2rem,4vw,3rem); font-weight:700; color:var(--white); line-height:1.1; margin:0 0 1.5rem;"><span style="color:var(--gold);">50.000€</span> Jahresumsatz.<br/>Pro 0,2m². Skalierbar.</h1>
+        <h1 class="animate-fade-up delay-100" style="font-size:clamp(2rem,4vw,3rem); font-weight:700; color:var(--white); line-height:1.1; margin:0 0 1.5rem;"><span style="color:var(--gold);{blur}">50.000€</span> Jahresumsatz.<br/>Pro 0,2m². Skalierbar.</h1>
         <p class="animate-fade-up delay-200" style="font-size:1.05rem; color:rgba(255,255,255,0.7); line-height:1.7; margin-bottom:2rem;">Standardisierte Displays, EDI-fähig, 3-Monats-Pilotprogramm mit datengetriebener Auswertung. Vom Pilot zum Roll-out — risikofrei und skalierbar.</p>
         <div class="animate-fade-up delay-300" style="display:flex; gap:2.5rem;">
           <div><div class="stat-number" style="font-size:2rem;">Ø 2/Tag</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">Verkäufe</div></div>
-          <div><div class="stat-number" style="font-size:2rem;">17–50T€</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">Jahresnetto/Display</div></div>
+          <div><div class="stat-number" style="font-size:2rem;{blur}">17–50T€</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">Jahresnetto/Display</div></div>
           <div><div class="stat-number" style="font-size:2rem;">EDI</div><div class="stat-label" style="color:rgba(255,255,255,0.4);">Anbindung</div></div>
         </div>
       </div>
@@ -50,7 +53,7 @@
     <img src="/img/7.jpeg" alt="FIREBALL Ziele Partnerschaft" style="width:100%; border:1px solid var(--gray-200);" />
     <div>
       <h2 style="font-size:1.6rem; color:var(--teal); margin:0 0 1.5rem;">Getestete Produktivität</h2>
-      <p style="font-size:0.95rem; color:var(--gray-500); line-height:1.7; margin-bottom:1.5rem;">In ersten Tests: durchschnittlich ca. 2 Ohrringe pro Tag pro Display. Maximum: 3,8. Minimum: knapp 1. Das ergibt 17.000–50.000€ Jahresnetto-Produktivität auf 0,2m².</p>
+      <p style="font-size:0.95rem; color:var(--gray-500); line-height:1.7; margin-bottom:1.5rem;">In ersten Tests: durchschnittlich ca. 2 Ohrringe pro Tag pro Display. Maximum: 3,8. Minimum: knapp 1. Das ergibt <span style="{blur}">17.000–50.000€</span> Jahresnetto-Produktivität auf 0,2m².</p>
       <div style="display:flex; flex-direction:column; gap:0.75rem;">
         <div style="padding-left:1rem; border-left:3px solid #2C5F7C;">
           <p style="font-size:0.9rem; color:var(--teal); margin:0;"><strong>Erfolgsfaktor 1:</strong> Frequenz (Lage im Shop)</p>
@@ -93,8 +96,8 @@
             <span style="font-size:0.65rem; font-family:'Josefin Sans',sans-serif; letter-spacing:0.1em; color:#2C5F7C; text-transform:uppercase;">{step.t}</span>
             <h3 style="font-size:1.05rem; color:var(--teal); margin:0.2rem 0 0.4rem;">{step.title}</h3>
             <p style="font-size:0.85rem; color:var(--gray-500); line-height:1.6; margin-bottom:0.75rem;">{step.desc}</p>
-            {#each step.tasks as task}<div style="display:flex; gap:0.4rem; margin-bottom:0.3rem;"><span style="color:#2C5F7C; font-size:0.8rem;">✓</span><span style="font-size:0.8rem; color:var(--gray-700); line-height:1.4;">{task}</span></div>{/each}
-            {#if step.tip}<div style="margin-top:0.75rem; padding:0.6rem; background:rgba(44,95,124,0.05); border-left:2px solid #2C5F7C;"><p style="font-size:0.75rem; color:var(--teal); margin:0;"><strong>Tipp:</strong> {step.tip}</p></div>{/if}
+            {#each step.tasks as task}<div style="display:flex; gap:0.4rem; margin-bottom:0.3rem;"><span style="color:#2C5F7C; font-size:0.8rem;">✓</span><span style="font-size:0.8rem; color:var(--gray-700); line-height:1.4;{task.includes('€') ? blur : ''}">{task}</span></div>{/each}
+            {#if step.tip}<div style="margin-top:0.75rem; padding:0.6rem; background:rgba(44,95,124,0.05); border-left:2px solid #2C5F7C;"><p style="font-size:0.75rem; color:var(--teal); margin:0;{step.tip?.includes('€') ? blur : ''}"><strong>Tipp:</strong> {step.tip}</p></div>{/if}
           </div>
         </div>
       </div>
@@ -108,6 +111,8 @@
   <p style="color:rgba(255,255,255,0.5); margin-bottom:1.5rem;">Datengetrieben, risikofrei, skalierbar. Ihre individuelle ROI-Kalkulation in 24 Stunden.</p>
   <a href="#" onclick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} class="btn-primary">ROI-Kalkulation anfordern →</a>
 </section>
+
+<PriceGate bind:unlocked />
 
 <footer style="background:var(--teal); border-top:1px solid rgba(255,255,255,0.08); padding:2rem; text-align:center;">
   <p class="fireball-brand" style="color:var(--gold); font-size:1rem; margin-bottom:0.5rem;">FIREBALL</p>
